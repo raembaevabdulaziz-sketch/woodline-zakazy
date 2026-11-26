@@ -1,5 +1,5 @@
 // Offline shell for the Woodline orders app. Pages: network first; images and icons: cache first.
-const C="woodline-v1";
+const C="woodline-v2";
 const ASSETS=["./","index.html","manifest.webmanifest","logo.svg","living.jpg","sofa.jpg","dining.jpg","chair.jpg","icon-192.png","icon-512.png","apple-touch-icon.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});

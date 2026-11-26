@@ -364,6 +364,48 @@ h1{font-family:var(--font-display);font-weight:800;font-size:24px;margin:0;lette
   @keyframes pillIn{from{transform:scaleX(.55);opacity:.3}}
   body,.nav,.topbar,.hero,.tile,.panel2,.rows,.empty,.money,.info,.mpanel{transition:background-color .3s,color .3s}
 }
+/* ---- v2: segmented switch, items, history, trash, clients ---- */
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:8px;font-weight:700;font-size:14px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.items{display:flex;flex-direction:column;gap:10px}
+.itm{border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.itm .top{display:flex;gap:8px;align-items:flex-end}
+.itm .top .field{flex:1}
+.itm .x{border:0;background:var(--gray-soft);color:var(--muted);width:42px;height:42px;border-radius:12px;font-size:20px;flex:none}
+.itm .g3{display:grid;grid-template-columns:minmax(78px,.8fr) 1fr 1fr;gap:8px}
+.itm .g3 .field{font-size:12px}
+.itm .g3 input{padding:10px 8px}
+.addit{border:1px dashed var(--accent);background:transparent;border-radius:12px;padding:11px;font-weight:700;color:var(--accent)}
+.sumline{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.sumline b{color:var(--fg);font-variant-numeric:tabular-nums}
+.sumline b.pos{color:var(--green)} .sumline b.neg{color:var(--red)}
+.sugg{background:var(--accent-soft);color:var(--fg);border-radius:12px;padding:10px 12px;font-size:13.5px;display:flex;flex-direction:column;gap:8px}
+.sugg .btn{align-self:flex-start}
+.itbl{background:var(--surface-2);border-radius:16px;padding:4px 14px}
+.itr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
+.itr:first-child{border-top:0}
+.itr .n{font-weight:600;overflow-wrap:anywhere}
+.itr .s{font-size:12.5px;color:var(--muted);grid-column:1 / -1}
+.itr .v{font-weight:700;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.pl{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:14px;padding:10px 0;border-top:1px solid var(--line)}
+.pl span{color:var(--muted)} .pl b{text-align:right;font-variant-numeric:tabular-nums}
+.pl .pos{color:var(--green)} .pl .neg{color:var(--red)}
+.hist{background:var(--surface-2);border-radius:16px;padding:4px 14px}
+.hr{padding:9px 0;border-top:1px solid var(--line);font-size:13.5px;overflow-wrap:anywhere}
+.hr:first-child{border-top:0}
+.hr small{display:block;color:var(--muted);font-size:12px;margin-bottom:1px}
+.sec-h{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:-6px}
+.tbox{background:var(--surface-2);border-radius:16px;padding:2px 14px}
+.trow{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
+.trow:first-child{border-top:0}
+.trow .t{font-weight:600}
+.trow .s{font-size:12.5px;color:var(--muted)}
+.trow .acts{display:flex;gap:8px;flex-wrap:wrap}
+.delbanner{background:var(--red-soft);color:var(--red);border-radius:14px;padding:10px 12px;font-size:14px;font-weight:600}
+.ctag{font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 8px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.rowi .r .debt{color:var(--red)}
+.rowi .r small{display:block;font-size:11.5px;font-weight:500;color:var(--muted)}
 /* ---- login ---- */
 .login{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
   background:#1a3828 url(living.jpg) center/cover no-repeat}
@@ -411,6 +453,7 @@ h1{font-family:var(--font-display);font-weight:800;font-size:24px;margin:0;lette
     <div class="rows more">
       <button class="rowi" type="button" id="openAccess"><span class="av acc" id="accIco"></span><div style="min-width:0"><div class="t">Доступ для коллег</div><div class="s">Как дать коллегам права на редактирование</div></div><span></span></button>
       <button class="rowi" type="button" id="openTheme"><span class="av acc" id="thIco"></span><div style="min-width:0"><div class="t">Тема оформления</div><div class="s" id="thLbl">Как в системе</div></div><span></span></button>
+      <button class="rowi" type="button" id="openTrash"><span class="av acc" id="trIco"></span><div style="min-width:0"><div class="t">Корзина</div><div class="s" id="trLbl">Удалённые заказы хранятся 20 дней</div></div><span></span></button>
       <button class="rowi" type="button" id="openAccount"><span class="av acc" id="accIco2"></span><div style="min-width:0"><div class="t">Аккаунт</div><div class="s" id="accLbl">—</div></div><span></span></button>
       <button class="rowi" type="button" id="openInstall"><span class="av acc" id="insIco"></span><div style="min-width:0"><div class="t">Иконка на экране телефона</div><div class="s">Открывать приложение одним нажатием</div></div><span></span></button>
     </div>
@@ -436,11 +479,20 @@ h1{font-family:var(--font-display);font-weight:800;font-size:24px;margin:0;lette
     <div class="topbar">
       <div class="tb-row"><div><h1>Сайт</h1><div class="sub" id="cntS"></div></div></div>
       <label class="sbox"><span class="ico i18" data-ico="search"></span><input id="qS" type="search" placeholder="Имя, телефон, адрес или ID" autocomplete="off" aria-label="Поиск по клиентам"></label>
+      <div class="seg" id="sMode" role="group" aria-label="Что показать">
+        <button type="button" data-m="orders" aria-pressed="true">Заказы</button>
+        <button type="button" data-m="clients" aria-pressed="false">Клиенты</button>
+      </div>
       <div class="chips" id="fS">
         <button class="chip" type="button" data-v="active" aria-pressed="true">Активные<span class="n"></span></button>
         <button class="chip" type="button" data-v="debt" aria-pressed="false">С долгом<span class="n"></span></button>
         <button class="chip" type="button" data-v="done" aria-pressed="false">Завершённые<span class="n"></span></button>
         <button class="chip" type="button" data-v="all" aria-pressed="false">Все<span class="n"></span></button>
+      </div>
+      <div class="chips" id="fC" hidden>
+        <button class="chip" type="button" data-v="all" aria-pressed="true">Все<span class="n"></span></button>
+        <button class="chip" type="button" data-v="debt" aria-pressed="false">С долгом<span class="n"></span></button>
+        <button class="chip" type="button" data-v="repeat" aria-pressed="false">Постоянные<span class="n"></span></button>
       </div>
     </div>
     <div class="list" id="listS"></div>
@@ -468,9 +520,16 @@ h1{font-family:var(--font-display);font-weight:800;font-size:24px;margin:0;lette
       <div class="legend"><span><i class="dot uzum"></i>Узум</span><span><i class="dot site"></i>Сайт</span></div>
       <div class="chart" id="chart"></div>
     </div>
+    <div class="gh"><h2>Прибыль</h2><span class="n" id="kCover"></span></div>
+    <div class="tiles">
+      <div class="tile"><b id="kRev">0</b><span>Выручка, сум</span></div>
+      <div class="tile"><b id="kCost">0</b><span>Себестоимость и расходы</span></div>
+      <div class="tile green"><b id="kProfit">0</b><span>Прибыль, сум</span></div>
+      <div class="tile"><b id="kMargin">—</b><span>Маржа</span></div>
+    </div>
     <div class="two">
       <div class="panel2"><h3>Активные заказы по статусам</h3><div class="hbars" id="stBars"></div></div>
-      <div class="panel2"><h3>Популярные товары</h3><div class="hbars" id="topBars"></div></div>
+      <div class="panel2"><h3>Товары: продано и прибыль</h3><div class="hbars" id="topBars"></div></div>
     </div>
     <div class="panel2">
       <h3>Должники</h3>
@@ -517,6 +576,8 @@ const ICONS={
   users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>',
   device:'<rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
   check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  undo:'<path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
   moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
   box:'<path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5z"/><path d="M3.5 7.5 12 12l8.5-4.5M12 12v9"/>'
 };
@@ -535,7 +596,9 @@ const TABS=["home","uzum","site","stats"];
 const GROUPS=[["late","Просрочено"],["today","Сегодня"],["tomorrow","Завтра"],["week","На этой неделе"],["later","Позже"],["nodate","Без даты"],["done","Завершённые"]];
 
 /* ---------- state ---------- */
-let orders=[],col=null,myId=null,myName="",readOnly=false,loaded=false;
+let orders=[],allDocs=[],trash=[],col=null,myId=null,myName="",readOnly=false,loaded=false;
+const TRASH_DAYS=20;
+let sMode="orders",fC="all",purged=false;
 let tab="home",fU="active",fS="active",period="30";
 let sheetMode=null,sheetId=null,confirmDel=false,payOpen=false;
 let flashId=null,flashT,enterT;
@@ -569,6 +632,25 @@ function num(v){return Number(v)||0}
 function total(o){return chOf(o)==="uzum"?num(o.amount):num(o.total)}
 function remaining(o){if(chOf(o)!=="site")return 0;const r=o.remaining;return r==null||r===""?0:num(r)}
 function title(o){return chOf(o)==="uzum"?(o.product||"Товар не указан"):(o.client||"Без имени")}
+/* ---- items, cost, profit (old orders without items read as one item) ---- */
+function itemsOf(o){
+  if(Array.isArray(o.items)&&o.items.length)return o.items.map(i=>({name:String(i.name||""),qty:Math.max(1,num(i.qty)||1),price:num(i.price),cost:num(i.cost)}));
+  const ch=chOf(o),qty=ch==="uzum"?(num(o.qty)||1):1,t=total(o);
+  if(!o.product&&!t)return[];
+  return[{name:o.product||"",qty,price:qty?Math.round(t/qty):t,cost:0}];
+}
+function itemsSum(it){return it.reduce((s,i)=>s+i.qty*i.price,0)}
+function itemsCost(it){return it.reduce((s,i)=>s+i.qty*i.cost,0)}
+function costOf(o){return itemsCost(itemsOf(o))}
+function hasCost(o){const it=itemsOf(o);return it.length>0&&it.every(i=>i.cost>0)}
+function profitOf(o){return total(o)-costOf(o)-num(o.expenses)}
+function marginPct(p,rev){return rev>0?Math.round(p/rev*100)+"%":"—"}
+function productSummary(it){return it.filter(i=>i.name).map(i=>i.name+(i.qty>1?" ×"+i.qty:"")).join(", ")}
+/* ---- history ---- */
+function FV(){return firebase.firestore.FieldValue}
+function hist(text){return{at:Date.now(),by:myName||"",text}}
+function addHist(text){return FV().arrayUnion(hist(text))}
+function shortName(n){n=String(n||"");return n.includes("@")?n.split("@")[0]:n}
 function initials(n){const p=String(n||"").trim().split(/\s+/).filter(Boolean);if(!p.length)return"?";return (p[0][0]+(p[1]?p[1][0]:"")).toUpperCase()}
 function nextStatus(o){const f=FLOW[chOf(o)],i=f.indexOf(o.status||"Новый");return i>=0&&i<f.length-1?f[i+1]:null}
 function storageGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
@@ -611,8 +693,9 @@ async function setStatus(o,v){
   if(v==="Доставлен"&&!o.deliveredAt)patch.deliveredAt=Date.now();
   if(v!=="Доставлен"&&o.deliveredAt)patch.deliveredAt=null;
   flashId=o.id;clearTimeout(flashT);flashT=setTimeout(()=>{flashId=null},1300);
+  patch.history=addHist("Статус: "+prev.status+" → "+v);
   try{await col.doc(o.id).update(patch);
-    toast(title(o)+" → "+v,"Отменить",async()=>{try{await col.doc(o.id).update({...prev,updatedAt:Date.now()})}catch(e){showErr(e)}})}
+    toast(title(o)+" → "+v,"Отменить",async()=>{try{await col.doc(o.id).update({...prev,updatedAt:Date.now(),history:addHist("Статус возвращён: "+prev.status)})}catch(e){showErr(e)}})}
   catch(e){showErr(e)}
 }
 
@@ -645,7 +728,8 @@ function cardSite(o){
 }
 function cardUzum(o){
   const c=cardBase(o);c.append(cardHead(o,"Заказ № "+(o.uzumId||"—")));
-  const t=el("div","tags");if(o.scheme)t.append(el("span","tag",o.scheme));t.append(el("span","tag",(o.qty||1)+" шт"));if(num(o.amount))t.append(el("span","tag",moneyS(o.amount)));
+  const it=itemsOf(o),q=it.reduce((s,i)=>s+i.qty,0)||num(o.qty)||1;
+  const t=el("div","tags");if(o.scheme)t.append(el("span","tag",o.scheme));t.append(el("span","tag",q+" шт"));if(num(o.amount))t.append(el("span","tag",moneyS(o.amount)));
   c.append(t);
   const inf=el("div","c-info");inf.append(infoLine("cal",["Срок отгрузки "+fmtDay(o.date)]));if(o.note)inf.append(infoLine("box",[o.note]));c.append(inf);
   c.append(cardFoot(o));return c;
@@ -681,7 +765,49 @@ function renderUzum(){
   if(!v.length){L.append(emptyBox("search","Ничего не найдено","Попробуйте другой фильтр или поиск."));return}
   renderList(L,v,cardUzum,fU==="active"||fU==="all");
 }
+/* ---- client base: built from site orders, grouped by phone ---- */
+function clientKey(o){return phoneDigits(o.phone)}
+function buildClients(){
+  const map=new Map();
+  orders.filter(o=>chOf(o)==="site"&&clientKey(o)).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0)).forEach(o=>{
+    const k=clientKey(o);let c=map.get(k);
+    if(!c){c={key:k,name:"",phone:fmtPhone(o.phone),phone2:"",address:"",orders:[],count:0,sum:0,debt:0,last:0};map.set(k,c)}
+    c.orders.push(o);c.count++;if(o.client)c.name=o.client;if(o.phone2)c.phone2=fmtPhone(o.phone2);if(o.address)c.address=o.address;
+    if(o.status!=="Отменён"){c.sum+=total(o);c.debt+=remaining(o)}
+    c.last=Math.max(c.last,o.createdAt||0);
+  });
+  return[...map.values()].map(c=>({...c,orders:sortOrders(c.orders)}));
+}
+function clientRow(c){
+  const r=el("button","rowi");r.type="button";
+  const a=el("div","av site",initials(c.name));
+  const mid=el("div");mid.style.minWidth="0";mid.append(el("div","t",c.name||c.phone));
+  mid.append(el("div","s",c.phone+" · "+c.count+" "+plural(c.count,"заказ","заказа","заказов")+(c.sum?" · "+compact(c.sum)+" сум":"")));
+  const rt=el("div","r");
+  if(c.debt>0){const d=el("span","debt",money(c.debt));rt.append(d,el("small",null,"долг"))}
+  else if(c.count>1)rt.append(el("span","ctag","постоянный"));
+  r.append(a,mid,rt);r.addEventListener("click",()=>openClient(c.key));return r;
+}
+function renderClients(){
+  const q=$("qS").value.trim().toLowerCase(),qd=q.replace(/\D/g,""),all=buildClients();
+  const debt=all.filter(c=>c.debt>0),rep=all.filter(c=>c.count>1);
+  setChips("fC",fC,{all:all.length,debt:debt.length,repeat:rep.length});
+  const ds=debt.reduce((s,c)=>s+c.debt,0);
+  $("cntS").textContent=all.length+" "+plural(all.length,"клиент","клиента","клиентов")+(ds?" · долг "+moneyS(ds):"");
+  let v=fC==="debt"?debt:fC==="repeat"?rep:all;
+  if(q)v=v.filter(c=>[c.name,c.phone,c.phone2,c.address].join(" ").toLowerCase().includes(q)||(qd.length>=3&&c.key.includes(qd)));
+  v=fC==="debt"?v.slice().sort((a,b)=>b.debt-a.debt):v.slice().sort((a,b)=>b.last-a.last);
+  const L=$("listS");L.replaceChildren();
+  if(!loaded)return;
+  if(!all.length){L.append(emptyBox("users","Клиентов пока нет","Клиенты появятся здесь сами, когда вы добавите заказ с сайта с телефоном."));return}
+  if(!v.length){L.append(emptyBox("search","Никого не нашли","Попробуйте другой фильтр или поиск."));return}
+  const rows=el("div","rows");v.forEach(c=>rows.append(clientRow(c)));L.append(rows);
+}
 function renderSite(){
+  document.querySelectorAll("#sMode button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.m===sMode)));
+  $("fS").hidden=sMode!=="orders";$("fC").hidden=sMode!=="clients";
+  $("qS").placeholder=sMode==="clients"?"Имя, телефон или адрес клиента":"Имя, телефон, адрес или ID";
+  if(sMode==="clients")return renderClients();
   const q=$("qS").value.trim().toLowerCase(),all=orders.filter(o=>chOf(o)==="site"),act=all.filter(o=>!isClosed(o));
   const debt=o=>o.status!=="Отменён"&&remaining(o)>0,debtors=all.filter(debt);
   setChips("fS",fS,{active:act.length,debt:debtors.length,done:all.length-act.length,all:all.length});
@@ -774,10 +900,16 @@ function renderStats(){
   const SB=$("stBars");SB.replaceChildren();const cnt={};orders.filter(o=>!isClosed(o)).forEach(o=>{const k=o.status||"Новый";cnt[k]=(cnt[k]||0)+1});
   const ord=["Новый","В производстве","Собран","Готов","В пути","Сдан в Узум"],keys=Object.keys(cnt).sort((a,b)=>ord.indexOf(a)-ord.indexOf(b)),mx=Math.max(1,...Object.values(cnt));
   if(!keys.length)SB.append(el("div","msg","Активных заказов нет"));keys.forEach(k=>SB.append(hbar(k,String(cnt[k]),cnt[k]/mx)));
+  const withCost=live.filter(hasCost),rev=withCost.reduce((a,o)=>a+total(o),0),cst=withCost.reduce((a,o)=>a+costOf(o)+num(o.expenses),0),prof=rev-cst;
+  $("kRev").textContent=money(rev);$("kCost").textContent=money(cst);$("kProfit").textContent=money(prof);$("kMargin").textContent=marginPct(prof,rev);
+  $("kProfit").style.color=prof<0?"var(--red)":"";
+  $("kCover").textContent=live.length?("по "+withCost.length+" из "+live.length+" "+plural(live.length,"заказа","заказов","заказов")+" с себестоимостью"):"";
   const TB=$("topBars");TB.replaceChildren();const pm={};
-  live.forEach(o=>{const k=(o.product||"").trim();if(!k)return;const key=k.toLowerCase();pm[key]=pm[key]||{name:k,n:0,sum:0};pm[key].n+=chOf(o)==="uzum"?(num(o.qty)||1):1;pm[key].sum+=total(o)});
-  const top=Object.values(pm).sort((a,b)=>b.n-a.n||b.sum-a.sum).slice(0,6),tm=Math.max(1,...top.map(x=>x.n));
-  if(!top.length)TB.append(el("div","msg","Нет заказов с указанным товаром за этот период"));top.forEach(x=>TB.append(hbar(x.name,x.n+" шт"+(x.sum?" · "+compact(x.sum):""),x.n/tm)));
+  live.forEach(o=>itemsOf(o).forEach(i=>{const k=i.name.trim();if(!k)return;const key=k.toLowerCase();pm[key]=pm[key]||{name:k,n:0,sum:0,profit:0,costed:true};const x=pm[key];
+    x.n+=i.qty;x.sum+=i.qty*i.price;if(i.cost>0)x.profit+=i.qty*(i.price-i.cost);else x.costed=false}));
+  const top=Object.values(pm).sort((a,b)=>b.n-a.n||b.sum-a.sum).slice(0,8),tm=Math.max(1,...top.map(x=>x.n));
+  if(!top.length)TB.append(el("div","msg","Нет заказов с указанным товаром за этот период"));
+  top.forEach(x=>TB.append(hbar(x.name,x.n+" шт"+(x.sum?" · "+compact(x.sum):"")+(x.costed&&x.profit?" · прибыль "+compact(x.profit):""),x.n/tm)));
   const DL=$("debtList");DL.replaceChildren();const debt=orders.filter(o=>chOf(o)==="site"&&o.status!=="Отменён"&&remaining(o)>0).sort((a,b)=>remaining(b)-remaining(a));
   if(!debt.length)DL.append(el("div","msg","Все клиенты рассчитались"));else{const rows=el("div","rows");rows.style.boxShadow="none";rows.style.border="1px solid var(--line)";debt.slice(0,10).forEach(o=>rows.append(homeRow(o,money(remaining(o)))));DL.append(rows)}
 }
@@ -827,9 +959,9 @@ function drawChart(P){
 async function exportCSV(){
   const m=$("exportMsg");
   if(!orders.length){m.textContent="Нет заказов для выгрузки.";return}
-  const head=["Канал","№ заказа Узум","ID сделки","ID заказа","Клиент","Телефон","Доп. телефон","Адрес","Товар","Кол-во","Схема","Сумма","Остаток","Оплачено","Дата доставки","Статус","Заметка","Создан"];
+  const head=["Канал","№ заказа Узум","ID сделки","ID заказа","Клиент","Телефон","Доп. телефон","Адрес","Товары","Кол-во","Схема","Сумма","Остаток","Оплачено","Себестоимость","Расходы","Прибыль","Дата доставки","Статус","Заметка","Создан"];
   const q=v=>{const s=v==null?"":String(v);return /[;"\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
-  const rows=sortOrders(orders).map(o=>{const ch=chOf(o);return[CH_NAME[ch],o.uzumId,o.dealId,o.orderId,o.client,fmtPhone(o.phone),fmtPhone(o.phone2),o.address,o.product,ch==="uzum"?(o.qty||1):"",o.scheme,total(o)||"",ch==="site"?remaining(o):"",ch==="site"?Math.max(0,num(o.total)-remaining(o)):"",fmtDate(o.date),o.status,o.note,fmtTs(o.createdAt)].map(q).join(";")});
+  const rows=sortOrders(orders).map(o=>{const ch=chOf(o),it=itemsOf(o),hc=hasCost(o);return[CH_NAME[ch],o.uzumId,o.dealId,o.orderId,o.client,fmtPhone(o.phone),fmtPhone(o.phone2),o.address,productSummary(it)||o.product,it.reduce((a,i)=>a+i.qty,0)||"",o.scheme,total(o)||"",ch==="site"?remaining(o):"",ch==="site"?Math.max(0,num(o.total)-remaining(o)):"",hc?costOf(o):"",num(o.expenses)||"",hc?profitOf(o):"",fmtDate(o.date),o.status,o.note,fmtTs(o.createdAt)].map(q).join(";")});
   const csv="﻿"+head.join(";")+"\r\n"+rows.join("\r\n");
   try{const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="zakazy-"+todayISO()+".csv";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);m.textContent="Файл готов. Его можно открыть в Excel."}
   catch(e){m.textContent="Не получилось скачать файл. Попробуйте ещё раз."}
@@ -850,40 +982,70 @@ function irow(box,label,value,copyVal){if(value==null||value==="")return;const r
 
 /* ---------- detail ---------- */
 function openDetail(id){sheetMode="detail";sheetId=id;confirmDel=false;payOpen=false;renderDetail();openSheet();$("panel").scrollTop=0}
+function itemsTable(o){
+  const it=itemsOf(o);if(!it.length)return null;
+  const box=el("div","itbl");
+  it.forEach(i=>{const r=el("div","itr");r.append(el("div","n",i.name||"Товар"),el("div","v",money(i.qty*i.price)));
+    r.append(el("div","s",i.qty+" шт × "+money(i.price)+(i.cost>0?" · себест. "+money(i.cost)+"/шт":"")));box.append(r)});
+  const tot=total(o),c=costOf(o),ex=num(o.expenses),pl=el("div","pl");
+  pl.append(el("span",null,"Сумма заказа"),el("b",null,moneyS(tot)));
+  if(hasCost(o)||ex){
+    if(hasCost(o))pl.append(el("span",null,"Себестоимость"),el("b",null,"− "+moneyS(c)));
+    if(ex)pl.append(el("span",null,"Расходы"),el("b",null,"− "+moneyS(ex)));
+    if(hasCost(o)){const p=profitOf(o);pl.append(el("span",null,"Прибыль · маржа "+marginPct(p,tot)),el("b",p<0?"neg":"pos",moneyS(p)))}
+  }
+  box.append(pl);return box;
+}
+function historyBox(o){
+  const h=(Array.isArray(o.history)?o.history.slice():[]).sort((a,b)=>(b.at||0)-(a.at||0));
+  if(!h.some(x=>/создан/i.test(x.text||""))&&o.createdAt)h.push({at:o.createdAt,by:o.createdByName||"",text:"Заказ создан"});
+  if(!h.length)return null;
+  const wrap=el("div");wrap.style.display="flex";wrap.style.flexDirection="column";wrap.style.gap="10px";
+  wrap.append(el("div","sec-h","История"));
+  const box=el("div","hist"),lim=5;
+  const draw=all=>{box.replaceChildren();(all?h:h.slice(0,lim)).forEach(x=>{const r=el("div","hr");r.append(el("small",null,fmtTs(x.at)+(x.by?" · "+shortName(x.by):"")),x.text||"");box.append(r)});
+    if(!all&&h.length>lim){const b=el("button","linkbtn","Показать всю историю ("+h.length+")");b.type="button";b.onclick=()=>draw(true);box.append(b)}};
+  draw(false);wrap.append(box);return wrap;
+}
 function renderDetail(){
-  const o=orders.find(x=>x.id===sheetId),P=$("panel");P.replaceChildren();
-  if(!o){P.append(phead("Заказ удалён","Его удалили с другого устройства."));return}
-  const ch=chOf(o);
+  const o=allDocs.find(x=>x.id===sheetId),P=$("panel");P.replaceChildren();
+  if(!o){P.append(phead("Заказ удалён","Его удалили насовсем."));return}
+  const ch=chOf(o),del=!!o.deletedAt;
   P.append(phead(title(o),ch==="uzum"?"Узум · заказ № "+(o.uzumId||"—"):"Сайт"+(o.product?" · "+o.product:""),avatar(o,true)));
-  const bd=el("div","badges"),i=daysInfo(o);bd.append(statusBtn(o));
-  bd.append(el("span","pillx "+(i.cls==="late"?"s-red":i.cls==="soon"?"s-amber":i.cls==="ok"?"s-green":"s-gray"),isClosed(o)?(o.deliveredAt?"доставлен "+fmtTs(o.deliveredAt).slice(0,10):o.status):(i.cls==="late"&&i.big!=="0"?"просрочен на "+i.big+" "+plural(+i.big,"день","дня","дней"):i.small==="сегодня"||i.small==="завтра"?"доставка "+i.small:(i.big==="—"?"нет даты":"через "+i.big+" "+i.small))));
-  const nb=nextBtn(o);if(nb)bd.append(nb);P.append(bd);
+  if(del){
+    const b=el("div","delbanner",'В корзине с '+fmtTs(o.deletedAt).slice(0,10)+(o.deletedBy?" · удалил(а) "+shortName(o.deletedBy):"")+". Удалится навсегда через "+trashDaysLeft(o)+" "+plural(trashDaysLeft(o),"день","дня","дней")+".");P.append(b);
+    if(!readOnly){const r=el("button","btn");r.type="button";r.append(ico("undo","i18"),"Вернуть из корзины");r.onclick=()=>restoreOrder(o);P.append(r)}
+  }else{
+    const bd=el("div","badges"),i=daysInfo(o);bd.append(statusBtn(o));
+    bd.append(el("span","pillx "+(i.cls==="late"?"s-red":i.cls==="soon"?"s-amber":i.cls==="ok"?"s-green":"s-gray"),isClosed(o)?(o.deliveredAt?"доставлен "+fmtTs(o.deliveredAt).slice(0,10):o.status):(i.cls==="late"&&i.big!=="0"?"просрочен на "+i.big+" "+plural(+i.big,"день","дня","дней"):i.small==="сегодня"||i.small==="завтра"?"доставка "+i.small:(i.big==="—"?"нет даты":"через "+i.big+" "+i.small))));
+    const nb=nextBtn(o);if(nb)bd.append(nb);P.append(bd);
+  }
   if(ch==="site"&&phoneDigits(o.phone)){
     const d=phoneDigits(o.phone),qa=el("div","qa");
     const call=el("a");call.href="tel:+"+d;call.append(ico("phone","i20"),"Позвонить");
     const tg=el("a");tg.href="https://t.me/+"+d;tg.target="_blank";tg.rel="noopener";tg.append(ico("send","i20"),"Telegram");
-    const cp=el("button");cp.type="button";cp.append(ico("copy","i20"),"Копировать");cp.onclick=()=>copyText(fmtPhone(o.phone));
-    qa.append(call,tg,cp);P.append(qa);
+    const cl=el("button");cl.type="button";cl.append(ico("users","i20"),"Клиент");cl.onclick=()=>openClient(d);
+    qa.append(call,tg,cl);P.append(qa);
   }
   const box=el("dl","info");box.style.margin="0";
   if(ch==="site"){
     irow(box,"Телефон",fmtPhone(o.phone),fmtPhone(o.phone));irow(box,"Доп. телефон",o.phone2?fmtPhone(o.phone2):"",o.phone2?fmtPhone(o.phone2):"");
     irow(box,"Адрес",o.address,o.address);irow(box,"Дата доставки",fmtDay(o.date));
-    irow(box,"ID сделки",o.dealId,o.dealId);irow(box,"ID заказа",o.orderId,o.orderId);irow(box,"Товар",o.product);
+    irow(box,"ID сделки",o.dealId,o.dealId);irow(box,"ID заказа",o.orderId,o.orderId);
   }else{
-    irow(box,"№ заказа",o.uzumId,o.uzumId);irow(box,"Товар",o.product);irow(box,"Количество",(o.qty||1)+" шт");
-    irow(box,"Схема",o.scheme);if(num(o.amount))irow(box,"Сумма",moneyS(o.amount));irow(box,"Срок отгрузки",fmtDay(o.date));
+    irow(box,"№ заказа",o.uzumId,o.uzumId);irow(box,"Схема",o.scheme);irow(box,"Срок отгрузки",fmtDay(o.date));
   }
-  P.append(box);
+  if(box.children.length)P.append(box);
+  const it=itemsTable(o);if(it){P.append(el("div","sec-h","Товары"),it)}
   if(ch==="site"&&(num(o.total)||remaining(o))){
-    const tot=num(o.total),rem=remaining(o),paid=Math.max(0,tot-rem),mp=el("div","mpanel"),m3=el("div","m3");
+    const tot=num(o.total),rem=Math.max(0,remaining(o)),paid=Math.max(0,tot-rem),mp=el("div","mpanel"),m3=el("div","m3");
     const c1=el("div");c1.append(el("span",null,"Сумма"),el("b",null,money(tot)));
     const c2=el("div");c2.append(el("span",null,"Оплачено"),el("b","paid",money(paid)));
     const c3=el("div");c3.append(el("span",null,"Остаток"),el("b",rem>0?"debt":"paid",money(rem)));
     m3.append(c1,c2,c3);mp.append(m3);
     if(tot>0){const bar=el("div","bar"),bi=el("i");bi.style.width=Math.min(100,paid/tot*100)+"%";bar.append(bi);mp.append(bar)}
-    if(Array.isArray(o.payments)&&o.payments.length){const ps=el("div","pays");o.payments.slice().reverse().forEach(p=>{const r=el("div");r.append(el("span",null,fmtTs(p.at)),el("b",null,"+ "+money(p.amount)));ps.append(r)});mp.append(ps)}
-    if(rem>0&&o.status!=="Отменён"&&!readOnly){
+    if(Array.isArray(o.payments)&&o.payments.length){const ps=el("div","pays");o.payments.slice().sort((a,b)=>b.at-a.at).forEach(p=>{const r=el("div");r.append(el("span",null,fmtTs(p.at)+(p.by?" · "+shortName(p.by):"")),el("b",null,"+ "+money(p.amount)));ps.append(r)});mp.append(ps)}
+    if(rem>0&&o.status!=="Отменён"&&!readOnly&&!del){
       if(payOpen){
         const pr=el("div","payrow"),pin=el("input");pin.id="payAmt";pin.inputMode="numeric";pin.placeholder="Сумма оплаты";pin.setAttribute("aria-label","Сумма оплаты");
         const all=el("button","btn ghost sm","Весь остаток");all.type="button";const ok=el("button","btn sm","Записать");ok.type="button";
@@ -892,9 +1054,9 @@ function renderDetail(){
         all.onclick=()=>{pin.value=money(rem)};
         ok.onclick=async()=>{const v=parseMoney(pin.value);if(!v){er.textContent="Впишите сумму оплаты.";er.hidden=false;return}
           if(v>rem){er.textContent="Сумма больше остатка ("+moneyS(rem)+").";er.hidden=false;return}
-          ok.disabled=true;const prev={remaining:rem,payments:o.payments||[]};
-          try{await col.doc(o.id).update({remaining:rem-v,payments:[...(o.payments||[]),{amount:v,at:Date.now()}],updatedAt:Date.now()});payOpen=false;renderDetail();
-            toast("Оплата +"+money(v)+" записана","Отменить",async()=>{try{await col.doc(o.id).update({...prev,updatedAt:Date.now()})}catch(e){showErr(e)}})}
+          ok.disabled=true;const pay={amount:v,at:Date.now(),by:myName||""};
+          try{await col.doc(o.id).update({remaining:FV().increment(-v),payments:FV().arrayUnion(pay),updatedAt:Date.now(),history:addHist("Оплата +"+money(v)+" сум")});payOpen=false;renderDetail();
+            toast("Оплата +"+money(v)+" записана","Отменить",async()=>{try{await col.doc(o.id).update({remaining:FV().increment(v),payments:FV().arrayRemove(pay),updatedAt:Date.now(),history:addHist("Оплата +"+money(v)+" сум отменена")})}catch(e){showErr(e)}})}
           catch(e){er.textContent="Не получилось сохранить. Попробуйте ещё раз.";er.hidden=false;ok.disabled=false}};
         pr.append(pin,all,ok);mp.append(pr,er);setTimeout(()=>pin.focus(),40);
       }else{const pb=el("button","btn soft","+ Внести оплату");pb.type="button";pb.onclick=()=>{payOpen=true;renderDetail()};mp.append(pb)}
@@ -902,18 +1064,76 @@ function renderDetail(){
     P.append(mp);
   }
   if(o.note)P.append(el("div","note",o.note));
-  const foot=el("div","sub");foot.textContent="Создан "+fmtTs(o.createdAt);P.append(foot);
-  if(o.createdByName)foot.textContent="Создан "+fmtTs(o.createdAt)+" · добавил(а) "+o.createdByName;
-  if(readOnly)return;
+  const hb=historyBox(o);if(hb)P.append(hb);
+  if(readOnly||del)return;
   if(confirmDel){
-    const c=el("div","confirm");c.append(el("span",null,"Удалить этот заказ?"));
-    const y=el("button","btn danger sm","Удалить");y.type="button";
-    y.onclick=async()=>{const data={...o};delete data.id;try{await col.doc(o.id).delete();closeSheet();toast("Заказ удалён","Вернуть",async()=>{try{await col.doc(o.id).set(data)}catch(e){showErr(e)}})}catch(e){showErr(e)}};
+    const c=el("div","confirm");c.append(el("span",null,"Убрать заказ в корзину? Его можно вернуть в течение "+TRASH_DAYS+" дней."));
+    const y=el("button","btn danger sm","В корзину");y.type="button";y.onclick=()=>trashOrder(o);
     const n=el("button","btn ghost sm","Нет");n.type="button";n.onclick=()=>{confirmDel=false;renderDetail()};c.append(y,n);P.append(c);
   }else{
     const b=el("div","pbtns");const e=el("button","btn grow","Изменить");e.type="button";e.onclick=()=>openForm(ch,o);
     const d=el("button","btn ghost","Удалить");d.type="button";d.style.color="var(--red)";d.onclick=()=>{confirmDel=true;renderDetail()};b.append(e,d);P.append(b);
   }
+}
+
+/* ---------- trash ---------- */
+function trashDaysLeft(o){return Math.max(0,Math.ceil((o.deletedAt+TRASH_DAYS*864e5-Date.now())/864e5))}
+async function trashOrder(o){
+  try{await col.doc(o.id).update({deletedAt:Date.now(),deletedBy:myName||"",updatedAt:Date.now(),history:addHist("Удалён в корзину")});closeSheet();
+    toast("Заказ в корзине","Вернуть",()=>restoreOrder(o,true))}catch(e){showErr(e)}
+}
+async function restoreOrder(o,quiet){
+  try{await col.doc(o.id).update({deletedAt:FV().delete(),deletedBy:FV().delete(),updatedAt:Date.now(),history:addHist("Возвращён из корзины")});
+    if(!quiet)toast("Заказ возвращён");if(sheetMode==="trash")openTrash()}catch(e){showErr(e)}
+}
+function purgeTrash(){
+  if(purged||readOnly||!col)return;purged=true;
+  const lim=Date.now()-TRASH_DAYS*864e5;trash.filter(o=>o.deletedAt<lim).forEach(o=>{col.doc(o.id).delete().catch(()=>{})});
+}
+let confirmPurge=null;
+function openTrash(){
+  sheetMode="trash";const P=$("panel"),keep=P.scrollTop;P.replaceChildren();
+  const lead=el("div","av acc");lead.append(ico("trash","i20"));
+  P.append(phead("Корзина",trash.length?trash.length+" "+plural(trash.length,"заказ","заказа","заказов")+" · хранятся "+TRASH_DAYS+" дней":"Удалённые заказы хранятся "+TRASH_DAYS+" дней",lead));
+  if(!trash.length){P.append(emptyBox("trash","Корзина пуста","Сюда попадают удалённые заказы. Их можно вернуть в течение "+TRASH_DAYS+" дней."));openSheet();return}
+  const box=el("div","tbox");
+  trash.forEach(o=>{const r=el("div","trow"),dl=trashDaysLeft(o);
+    r.append(el("div","t",title(o)+(chOf(o)==="uzum"?" · № "+(o.uzumId||"—"):"")));
+    r.append(el("div","s",CH_NAME[chOf(o)]+" · удалён "+fmtTs(o.deletedAt)+(o.deletedBy?" · "+shortName(o.deletedBy):"")+" · ещё "+dl+" "+plural(dl,"день","дня","дней")));
+    if(!readOnly){const a=el("div","acts");
+      if(confirmPurge===o.id){const y=el("button","btn danger sm","Удалить навсегда");y.type="button";y.onclick=async()=>{try{await col.doc(o.id).delete();confirmPurge=null;toast("Заказ удалён навсегда")}catch(e){showErr(e)}};
+        const n=el("button","btn ghost sm","Отмена");n.type="button";n.onclick=()=>{confirmPurge=null;openTrash()};a.append(el("span","s","Вернуть уже не получится."),y,n)}
+      else{const rs=el("button","btn soft sm");rs.type="button";rs.append(ico("undo","i16"),"Вернуть");rs.onclick=()=>restoreOrder(o);
+        const op=el("button","btn ghost sm","Открыть");op.type="button";op.onclick=()=>openDetail(o.id);
+        const dd=el("button","btn ghost sm","Удалить навсегда");dd.type="button";dd.style.color="var(--red)";dd.onclick=()=>{confirmPurge=o.id;openTrash()};a.append(rs,op,dd)}
+      r.append(a)}
+    box.append(r)});
+  P.append(box);openSheet();P.scrollTop=keep;
+}
+
+/* ---------- client sheet ---------- */
+function openClient(key){sheetMode="client";sheetId=key;renderClient();openSheet();$("panel").scrollTop=0}
+function renderClient(){
+  const c=buildClients().find(x=>x.key===sheetId),P=$("panel");P.replaceChildren();
+  if(!c){P.append(phead("Клиент не найден","У этого номера больше нет заказов."));return}
+  const a=el("div","av site lg",initials(c.name));
+  P.append(phead(c.name||c.phone,c.phone+(c.count>1?" · постоянный клиент":""),a));
+  const qa=el("div","qa");
+  const call=el("a");call.href="tel:+"+c.key;call.append(ico("phone","i20"),"Позвонить");
+  const tg=el("a");tg.href="https://t.me/+"+c.key;tg.target="_blank";tg.rel="noopener";tg.append(ico("send","i20"),"Telegram");
+  const cp=el("button");cp.type="button";cp.append(ico("copy","i20"),"Копировать");cp.onclick=()=>copyText(c.phone);
+  qa.append(call,tg,cp);P.append(qa);
+  const mp=el("div","mpanel"),m3=el("div","m3");
+  const c1=el("div");c1.append(el("span",null,"Заказов"),el("b",null,String(c.count)));
+  const c2=el("div");c2.append(el("span",null,"На сумму"),el("b",null,money(c.sum)));
+  const c3=el("div");c3.append(el("span",null,"Долг"),el("b",c.debt>0?"debt":"paid",money(c.debt)));
+  m3.append(c1,c2,c3);mp.append(m3);P.append(mp);
+  const box=el("dl","info");box.style.margin="0";irow(box,"Телефон",c.phone,c.phone);irow(box,"Доп. телефон",c.phone2,c.phone2);irow(box,"Адрес",c.address,c.address);
+  if(box.children.length)P.append(box);
+  P.append(el("div","sec-h","Заказы клиента"));
+  const rows=el("div","rows");rows.style.boxShadow="none";rows.style.border="1px solid var(--line)";
+  c.orders.forEach(o=>rows.append(homeRow(o,remaining(o)>0&&o.status!=="Отменён"?money(remaining(o)):null)));P.append(rows);
+  if(!readOnly){const b=el("button","btn");b.type="button";b.textContent="+ Новый заказ для клиента";b.onclick=()=>openForm("site",null,{client:c.name,phone:c.phone,phone2:c.phone2,address:c.address});P.append(b)}
 }
 
 /* ---------- status picker ---------- */
@@ -981,35 +1201,80 @@ function openChooser(){
   [["uzum","Узум","bag"],["site","Сайт","globe"]].forEach(([k,n,ic])=>{const b=el("button");b.type="button";const a=el("div","av lg "+k);a.append(ico(ic,"i24"));b.append(a,n);b.onclick=()=>openForm(k,null);s.append(b)});
   P.append(s);openSheet();
 }
-function openForm(ch,o){
-  sheetMode="form";sheetId=o?o.id:null;const P=$("panel");P.replaceChildren();
-  P.append(phead(o?"Изменить заказ":(ch==="uzum"?"Новый заказ Узум":"Новый клиент с сайта"),null));
+function itemsEditor(initial,onChange){
+  const wrap=el("div","items"),list=el("div","items");let seq=0;const rows=[];
+  function row(it){
+    const k=++seq,r=el("div","itm"),top=el("div","top");
+    const nm=inp("itN"+k,it.name,{maxlength:120,autocomplete:"off",placeholder:"Товар, цвет, размер"});
+    const x=el("button","x","×");x.type="button";x.setAttribute("aria-label","Убрать товар");
+    top.append(field("Товар",nm),x);
+    const g=el("div","g3");
+    const q=inp("itQ"+k,it.qty||1,{type:"number",min:1,max:999,inputmode:"numeric"});
+    const pr=moneyInp("itP"+k,it.price||null),cs=moneyInp("itC"+k,it.cost||null);
+    g.append(field("Кол-во",q),field("Цена за шт",pr),field("Себест. за шт",cs));
+    r.append(top,g);const ref={r,nm,q,pr,cs};rows.push(ref);
+    x.onclick=()=>{if(rows.length===1){nm.value="";q.value=1;pr.value="";cs.value="";onChange();return}rows.splice(rows.indexOf(ref),1);r.remove();onChange()};
+    [nm,q,pr,cs].forEach(e=>e.addEventListener("input",onChange));
+    list.append(r);return ref;
+  }
+  (initial.length?initial:[{name:"",qty:1,price:0,cost:0}]).forEach(row);
+  const add=el("button","addit","+ Ещё товар");add.type="button";add.onclick=()=>{const r=row({name:"",qty:1,price:0,cost:0});r.nm.focus();onChange()};
+  wrap.append(list,add);
+  wrap.get=()=>rows.map(r=>({name:r.nm.value.trim(),qty:Math.max(1,parseInt(r.q.value,10)||1),price:parseMoney(r.pr.value)||0,cost:parseMoney(r.cs.value)||0})).filter(i=>i.name||i.price);
+  return wrap;
+}
+function openForm(ch,o,pre){
+  sheetMode="form";sheetId=o?o.id:null;const P=$("panel");P.replaceChildren();pre=pre||{};
+  P.append(phead(o?"Изменить заказ":(ch==="uzum"?"Новый заказ Узум":"Новый заказ с сайта"),null));
   const f=el("form","form");f.noValidate=true;
-  let scheme=o&&o.scheme||"FBS";
+  let scheme=o&&o.scheme||"FBS",totTouched=!!o&&itemsSum(itemsOf(o))!==total(o),remTouched=false;
+  const totId=ch==="uzum"?"fAmount":"fTotal";
+  let ed,sumLine,profLine;
+  const recalc=()=>{
+    const it=ed.get(),sum=itemsSum(it),tot=$(totId);
+    if(!totTouched&&tot){tot.value=sum?money(sum):"";tot.dispatchEvent(new Event("calc"))}
+    sumLine.replaceChildren();if(sum)sumLine.append(el("span",null,"По товарам"),el("b",null,moneyS(sum)));
+    const t=parseMoney(tot&&tot.value)??sum,c=itemsCost(it),ex=parseMoney($("fExp")&&$("fExp").value)||0,all=it.length&&it.every(i=>i.cost>0);
+    profLine.replaceChildren();if(all&&t){const p=t-c-ex;profLine.append(el("span",null,"Прибыль · маржа "+marginPct(p,t)),el("b",p<0?"neg":"pos",moneyS(p)))}
+    else if(it.length&&t)profLine.append(el("span",null,"Впишите себестоимость каждого товара, чтобы видеть прибыль"));
+  };
   if(ch==="site"){
     f.append(el("div","fsec","Клиент"));
-    f.append(field("Имя клиента *",inp("fClient",o&&o.client,{maxlength:80,autocomplete:"off",placeholder:"Например, Карим Юлдашев"})));
-    const g1=el("div","grid2");g1.append(field("Телефон *",phoneInp("fPhone",o&&o.phone)),field("Доп. телефон",phoneInp("fPhone2",o&&o.phone2)));f.append(g1);
-    const ta=el("textarea");ta.id="fAddress";ta.rows=2;ta.maxLength=300;ta.value=o&&o.address||"";ta.placeholder="Город, район, улица, дом, квартира, ориентир";f.append(field("Адрес доставки",ta));
+    const ph=phoneInp("fPhone",o?o.phone:pre.phone),sg=el("div","sugg");sg.hidden=true;
+    const g1=el("div","grid2");g1.append(field("Телефон *",ph),field("Доп. телефон",phoneInp("fPhone2",o?o.phone2:pre.phone2)));f.append(g1,sg);
+    f.append(field("Имя клиента *",inp("fClient",o?o.client:pre.client,{maxlength:80,autocomplete:"off",placeholder:"Например, Карим Юлдашев"})));
+    const ta=el("textarea");ta.id="fAddress";ta.rows=2;ta.maxLength=300;ta.value=(o?o.address:pre.address)||"";ta.placeholder="Город, район, улица, дом, квартира, ориентир";f.append(field("Адрес доставки",ta));
+    const hint=()=>{const d=phoneDigits(ph.value);sg.hidden=true;if(d.length<12||o)return;const c=buildClients().find(x=>x.key===d);if(!c)return;
+      sg.replaceChildren();const last=c.orders.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0))[0];
+      sg.append(el("div",null,(c.name||"Этот клиент")+" уже заказывал(а): "+c.count+" "+plural(c.count,"заказ","заказа","заказов")+(last?", последний — "+(last.product||"заказ")+" ("+fmtTs(last.createdAt).slice(0,10)+")":"")+(c.debt>0?". Долг "+moneyS(c.debt)+".":".")));
+      const b=el("button","btn soft sm","Подставить имя и адрес");b.type="button";b.onclick=()=>{$("fClient").value=c.name||"";$("fAddress").value=c.address||"";if(c.phone2&&!$("fPhone2").value)$("fPhone2").value=c.phone2;sg.hidden=true};
+      sg.append(b);sg.hidden=false};
+    ph.addEventListener("input",hint);ph.addEventListener("blur",hint);
     f.append(el("div","fsec","Заказ"));
     const g2=el("div","grid2");g2.append(field("ID сделки",inp("fDeal",o&&o.dealId,{maxlength:40,autocomplete:"off"})),field("ID заказа",inp("fOrder",o&&o.orderId,{maxlength:40,autocomplete:"off"})));f.append(g2);
-    f.append(field("Товар",inp("fProduct",o&&o.product,{maxlength:160,placeholder:"Диван угловой, шкаф-купе…"})));
-    f.append(el("div","fsec","Оплата"));
-    const tot=moneyInp("fTotal",o&&o.total),rem=moneyInp("fRemain",o?o.remaining:null);
-    const g3=el("div","grid2");g3.append(field("Полная сумма, сум",tot),field("Остаток к оплате, сум",rem,"Оплачено: —"));f.append(g3);
-    const upd=()=>{const t=parseMoney(tot.value),r=parseMoney(rem.value),h=$("fRemain-h");if(!h)return;h.textContent=t==null?"Оплачено: —":(r!=null&&r>t?"Остаток больше суммы":"Оплачено: "+moneyS(t-(r??t)))};
-    tot.addEventListener("input",upd);rem.addEventListener("input",upd);setTimeout(upd,0);
-    f.append(qchips([["Без предоплаты",()=>{rem.value=tot.value;upd()}],["Предоплата 50%",()=>{const t=parseMoney(tot.value);if(t!=null){rem.value=money(Math.round(t/2));upd()}}],["Оплачено полностью",()=>{rem.value="0";upd()}]]));
   }else{
     f.append(field("№ заказа Узум *",inp("fUzum",o&&o.uzumId,{maxlength:40,inputmode:"numeric",autocomplete:"off"})));
-    const tg=el("div","toggle");["FBS","DBS"].forEach(s=>{const b=el("button",null,s);b.type="button";b.setAttribute("aria-pressed",String(s===scheme));b.onclick=()=>{scheme=s;tg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x.textContent===s)))};tg.append(b)});
+    const tg=el("div","toggle");["FBS","DBS"].forEach(x=>{const b=el("button",null,x);b.type="button";b.setAttribute("aria-pressed",String(x===scheme));b.onclick=()=>{scheme=x;tg.querySelectorAll("button").forEach(y=>y.setAttribute("aria-pressed",String(y.textContent===x)))};tg.append(b)});
     const lab=el("div","field");lab.append("Схема",tg);f.append(lab);
-    f.append(field("Товар *",inp("fProduct",o&&o.product,{maxlength:160,placeholder:"Стул кухонный, цвет, размер"})));
-    const st=el("div","stepper"),qi=inp("fQty",o?o.qty||1:1,{type:"number",min:1,max:999,inputmode:"numeric","aria-label":"Количество"});
-    const mn=el("button",null,"−");mn.type="button";mn.setAttribute("aria-label","Меньше");mn.onclick=()=>{qi.value=Math.max(1,(parseInt(qi.value,10)||1)-1)};
-    const pl=el("button",null,"+");pl.type="button";pl.setAttribute("aria-label","Больше");pl.onclick=()=>{qi.value=Math.min(999,(parseInt(qi.value,10)||0)+1)};
-    st.append(mn,qi,pl);const g2=el("div","grid2");const ql=el("div","field");ql.append("Количество",st);g2.append(ql,field("Сумма, сум",moneyInp("fAmount",o&&o.amount)));f.append(g2);
   }
+  f.append(el("div","fsec","Товары"));
+  ed=itemsEditor(o?itemsOf(o):[],()=>recalc());f.append(ed);
+  sumLine=el("div","sumline");f.append(sumLine);
+  f.append(el("div","fsec",ch==="uzum"?"Сумма":"Оплата"));
+  const tot=moneyInp(totId,o?(ch==="uzum"?o.amount:o.total):null);
+  tot.addEventListener("input",()=>{totTouched=true;recalc()});
+  const exp=moneyInp("fExp",o&&o.expenses);exp.addEventListener("input",recalc);
+  if(ch==="site"){
+    const rem=moneyInp("fRemain",o?Math.max(0,remaining(o)):null);rem.addEventListener("input",()=>{remTouched=true;upd()});
+    const g3=el("div","grid2");g3.append(field("Полная сумма, сум",tot,"Скидку можно вписать вручную"),field("Остаток к оплате, сум",rem,"Оплачено: —"));f.append(g3);
+    var upd=()=>{const t=parseMoney(tot.value),r=parseMoney(rem.value),h=$("fRemain-h");if(!h)return;h.textContent=t==null?"Оплачено: —":(r!=null&&r>t?"Остаток больше суммы":"Оплачено: "+moneyS(t-(r??t)))};
+    tot.addEventListener("input",upd);tot.addEventListener("calc",upd);setTimeout(upd,0);
+    f.append(qchips([["Без предоплаты",()=>{rem.value=tot.value;remTouched=true;upd()}],["Предоплата 50%",()=>{const t=parseMoney(tot.value);if(t!=null){rem.value=money(Math.round(t/2));remTouched=true;upd()}}],["Оплачено полностью",()=>{rem.value="0";remTouched=true;upd()}]]));
+    f.append(field("Доп. расходы, сум",exp,"Доставка, сборка, подъём на этаж — для расчёта прибыли"));
+  }else{
+    const g3=el("div","grid2");g3.append(field("Сумма заказа, сум",tot),field("Расходы, сум",exp,"Комиссия и логистика Узума"));f.append(g3);
+  }
+  profLine=el("div","sumline");f.append(profLine);
   f.append(el("div","fsec",ch==="uzum"?"Отгрузка":"Доставка"));
   const di=inp("fDate",o&&o.date,{type:"date"});
   f.append(field(ch==="uzum"?"Срок отгрузки *":"Дата доставки *",di));
@@ -1021,19 +1286,23 @@ function openForm(ch,o){
   cancel.type="button";save.type="submit";cancel.onclick=()=>o?openDetail(o.id):closeSheet();bar.append(cancel,save);f.append(bar);
   f.addEventListener("submit",async e=>{e.preventDefault();er.hidden=true;
     const v=id=>($(id)?$(id).value.trim():"");const fail=t=>{er.textContent=t;er.hidden=false;er.scrollIntoView({block:"center",behavior:"smooth"})};
-    const data={channel:ch,date:v("fDate"),status:v("fStatus"),note:v("fNote"),product:v("fProduct"),updatedAt:Date.now()};
+    const items=ed.get(),isum=itemsSum(items);
+    if(items.some(i=>!i.name))return fail("У каждого товара должно быть название.");
+    const data={channel:ch,date:v("fDate"),status:v("fStatus"),note:v("fNote"),items,product:productSummary(items),expenses:parseMoney(v("fExp"))||0,updatedAt:Date.now()};
     if(ch==="site"){
       Object.assign(data,{client:v("fClient"),phone:fmtPhone(v("fPhone")),phone2:fmtPhone(v("fPhone2")),address:v("fAddress"),dealId:v("fDeal"),orderId:v("fOrder")});
-      const t=parseMoney(v("fTotal")),r=parseMoney(v("fRemain"));
-      if(!data.client)return fail("Впишите имя клиента.");
+      const t=parseMoney(v("fTotal"))??isum,r=parseMoney(v("fRemain"));
       if(!data.phone)return fail("Впишите телефон клиента.");
-      if(t!=null&&r!=null&&r>t)return fail("Остаток не может быть больше полной суммы.");
-      data.total=t??0;data.remaining=r??(t??0);
+      if(!data.client)return fail("Впишите имя клиента.");
+      if(r!=null&&r>t)return fail("Остаток не может быть больше полной суммы.");
+      data.total=t;
+      if(o&&!remTouched)data.remaining=Math.max(0,remaining(o)+(t-num(o.total)));
+      else data.remaining=r??t;
       if(data.orderId&&orders.some(x=>x.id!==sheetId&&chOf(x)==="site"&&x.orderId===data.orderId))return fail("Заказ с ID "+data.orderId+" уже есть.");
     }else{
-      Object.assign(data,{uzumId:v("fUzum"),scheme,qty:Math.max(1,parseInt(v("fQty"),10)||1),amount:parseMoney(v("fAmount"))??0});
+      Object.assign(data,{uzumId:v("fUzum"),scheme,qty:items.reduce((a,i)=>a+i.qty,0)||1,amount:parseMoney(v("fAmount"))??isum});
       if(!data.uzumId)return fail("Впишите номер заказа Узум.");
-      if(!data.product)return fail("Впишите товар.");
+      if(!items.length)return fail("Добавьте хотя бы один товар.");
       if(orders.some(x=>x.id!==sheetId&&chOf(x)==="uzum"&&x.uzumId===data.uzumId))return fail("Заказ Узум № "+data.uzumId+" уже есть.");
     }
     if(!data.date)return fail(ch==="uzum"?"Выберите срок отгрузки.":"Выберите дату доставки.");
@@ -1041,12 +1310,19 @@ function openForm(ch,o){
     if(!o&&data.status==="Доставлен")data.deliveredAt=Date.now();
     save.disabled=true;
     try{
-      if(o){await col.doc(o.id).update(data);openDetail(o.id);toast("Изменения сохранены")}
-      else{data.createdAt=Date.now();if(myId){data.createdBy=myId;data.createdByName=myName}await col.add(data);closeSheet();
-        if(tab!=="home"&&tab!==ch)go(ch);toast(ch==="uzum"?"Заказ Узум добавлен":"Клиент добавлен")}
-    }catch(ex){save.disabled=false;fail(ex&&ex.code==="quota_exceeded"?"Хранилище заполнено. Удалите старые заказы.":ex&&(ex.code==="permission_denied"||ex.code==="permission-denied"||ex.code==="not_granted")?"У вас нет прав добавлять заказы. Попросите владельца дать доступ на редактирование.":"Не получилось сохранить. Проверьте интернет и попробуйте ещё раз.")}
+      if(o){
+        const L={client:"имя",phone:"телефон",phone2:"доп. телефон",address:"адрес",dealId:"ID сделки",orderId:"ID заказа",uzumId:"№ заказа",scheme:"схема",items:"товары",total:"сумма",amount:"сумма",remaining:"остаток",expenses:"расходы",date:ch==="uzum"?"срок отгрузки":"дата доставки",note:"заметка"};
+        const same=(a,b)=>JSON.stringify(a??"")===JSON.stringify(b??"");
+        const ch2=Object.keys(L).filter(k=>k in data&&!same(data[k],k==="items"?itemsOf(o):o[k])).map(k=>L[k]);
+        const parts=[];if(data.status!==o.status)parts.push("статус "+o.status+" → "+data.status);if(ch2.length)parts.push([...new Set(ch2)].join(", "));
+        if(parts.length)data.history=addHist("Изменено: "+parts.join("; "));
+        await col.doc(o.id).update(data);openDetail(o.id);toast("Изменения сохранены")}
+      else{data.createdAt=Date.now();data.history=[hist("Заказ создан")];if(myId){data.createdBy=myId;data.createdByName=myName}await col.add(data);closeSheet();
+        if(tab!=="home"&&tab!==ch)go(ch);toast(ch==="uzum"?"Заказ Узум добавлен":"Заказ добавлен")}
+    }catch(ex){save.disabled=false;fail(ex&&(ex.code==="permission_denied"||ex.code==="permission-denied"||ex.code==="not_granted")?"У вас нет прав добавлять заказы. Попросите владельца дать доступ.":"Не получилось сохранить. Проверьте интернет и попробуйте ещё раз.")}
   });
-  P.append(f);openSheet();P.scrollTop=0;setTimeout(()=>{if(!o){const first=f.querySelector("input");if(first)first.focus()}},60);
+  P.append(f);openSheet();P.scrollTop=0;recalc();
+  setTimeout(()=>{if(!o){const first=f.querySelector(pre.phone?"#itN1":"input");if(first)first.focus()}},60);
 }
 
 /* ---------- navigation ---------- */
@@ -1062,21 +1338,26 @@ function render(){
   const late=orders.filter(isLate).length,bh=$("bHome");bh.hidden=!late;bh.textContent=late;
   $("fab").style.visibility=(readOnly||!col)?"hidden":"visible";$("roBanner").hidden=!readOnly;
   if(sheetMode==="detail"&&!payOpen&&!confirmDel)renderDetail();
+  else if(sheetMode==="client")renderClient();
+  else if(sheetMode==="trash")openTrash();
+  $("trLbl").textContent=trash.length?trash.length+" "+plural(trash.length,"заказ","заказа","заказов")+" · хранятся "+TRASH_DAYS+" дней":"Удалённые заказы хранятся "+TRASH_DAYS+" дней";
 }
 function showErr(e){toast(e&&(e.code==="permission_denied"||e.code==="permission-denied"||e.code==="not_granted")?"Нет прав на изменение. Попросите доступ на редактирование.":"Не получилось сохранить. Проверьте интернет.")}
 
 /* ---------- wiring ---------- */
 function setToday(){$("todayLbl").textContent=new Date().toLocaleDateString("ru-RU",{weekday:"long",day:"numeric",month:"long"})}
 setToday();
-$("accIco").append(ico("users","i20"));$("insIco").append(ico("device","i20"));$("thIco").append(ico("moon","i20"));
+$("accIco").append(ico("users","i20"));$("trIco").append(ico("trash","i20"));$("openTrash").addEventListener("click",()=>{confirmPurge=null;openTrash()});$("insIco").append(ico("device","i20"));$("thIco").append(ico("moon","i20"));
 applyTheme(storageGet(TH_KEY)||"light");applyAccent(storageGet(ACC_KEY)||"woodline");thLabel();$("openTheme").addEventListener("click",openTheme);
 document.querySelectorAll(".nav [data-tab]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.tab)));
 window.addEventListener("hashchange",()=>{const h=location.hash.slice(1);if(TABS.includes(h)&&h!==tab)go(h,true)});
 $("fab").addEventListener("click",()=>{if(!col||readOnly)return;if(tab==="uzum"||tab==="site")openForm(tab,null);else openChooser()});
 document.querySelectorAll("[data-jump]").forEach(b=>b.addEventListener("click",()=>{const k=b.dataset.jump;
-  if(k==="debt"){fS="debt";go("site");return}const g=$("g-"+k);if(g)g.scrollIntoView({behavior:"smooth",block:"start"})}));
+  if(k==="debt"){fS="debt";sMode="orders";go("site");return}const g=$("g-"+k);if(g)g.scrollIntoView({behavior:"smooth",block:"start"})}));
 $("fU").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b){fU=b.dataset.v;renderUzum()}});
 $("fS").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b){fS=b.dataset.v;renderSite()}});
+$("fC").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b){fC=b.dataset.v;renderSite()}});
+$("sMode").addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.m!==sMode){sMode=b.dataset.m;$("qS").value="";renderSite()}});
 $("fP").addEventListener("click",e=>{const b=e.target.closest(".chip");if(b){period=b.dataset.v;renderStats()}});
 $("qU").addEventListener("input",renderUzum);$("qS").addEventListener("input",renderSite);
 $("exportBtn").addEventListener("click",exportCSV);
@@ -1109,14 +1390,24 @@ $("lReset").addEventListener("click",async()=>{const er=$("lErr"),em=$("lEmail")
   try{await auth.sendPasswordResetEmail(em);er.className="msg ok";er.textContent="Если такой аккаунт есть, письмо со ссылкой отправлено на "+em+"."}
   catch(ex){er.className="msg err";er.textContent=/network/.test(ex&&ex.code||"")?"Нет интернета. Проверьте подключение.":"Не получилось отправить письмо. Проверьте email."}
   er.hidden=false});
-function openAccount(){
+function openAccount(focusName){
   sheetMode="info";const P=$("panel");P.replaceChildren();const lead=el("div","av acc");lead.append(ico("users","i20"));
-  P.append(phead("Аккаунт",myName||"",lead));
-  P.append(el("div","note","Вы вошли как "+(myName||"—")+". Заказы общие для всех, кому владелец дал доступ."));
+  const u=auth&&auth.currentUser;
+  P.append(phead("Аккаунт",u?u.email:"",lead));
+  const nm=inp("accName",u&&u.displayName||"",{maxlength:40,autocomplete:"name",placeholder:"Например, Абдулазиз"});
+  P.append(field("Ваше имя",nm,"Так вас будет видно в истории заказов и оплат"));
+  const er=el("div","msg");er.hidden=true;
+  const sv=el("button","btn","Сохранить имя");sv.type="button";
+  sv.onclick=async()=>{const v=nm.value.trim();if(!v){er.className="msg err";er.textContent="Впишите имя.";er.hidden=false;return}
+    sv.disabled=true;try{await u.updateProfile({displayName:v});myName=v;$("accLbl").textContent=v;er.className="msg ok";er.textContent="Сохранено.";er.hidden=false}
+    catch(e){er.className="msg err";er.textContent="Не получилось сохранить. Проверьте интернет.";er.hidden=false}finally{sv.disabled=false}};
+  P.append(er,sv);
+  P.append(el("div","note","Заказы общие для всех, кому владелец дал доступ."));
   const b=el("button","btn ghost","Выйти из аккаунта");b.type="button";b.style.color="var(--red)";
   b.onclick=async()=>{closeSheet();try{await auth.signOut()}catch(e){}};P.append(b);openSheet();
+  if(focusName)setTimeout(()=>nm.focus(),80);
 }
-$("accIco2").append(ico("users","i20"));$("openAccount").addEventListener("click",openAccount);
+$("accIco2").append(ico("users","i20"));$("openAccount").addEventListener("click",()=>openAccount(false));
 
 (function boot(){
   const m=$("msg");
@@ -1125,11 +1416,12 @@ $("accIco2").append(ico("users","i20"));$("openAccount").addEventListener("click
   try{fdb.enablePersistence({synchronizeTabs:true}).catch(()=>{})}catch(e){}
   auth.onAuthStateChanged(u=>{
     if(unsub){unsub();unsub=null}
-    if(!u){col=null;orders=[];loaded=false;myId=null;myName="";$("accLbl").textContent="—";m.hidden=true;showLogin();render();return}
-    hideLogin();myId=u.uid;myName=u.displayName||u.email||"";$("accLbl").textContent=myName;
+    if(!u){col=null;orders=[];allDocs=[];trash=[];loaded=false;myId=null;myName="";$("accLbl").textContent="—";m.hidden=true;showLogin();render();return}
+    hideLogin();myId=u.uid;myName=u.displayName||u.email||"";$("accLbl").textContent=myName;purged=false;
+    if(!u.displayName&&storageGet("askName_"+u.uid)!=="1"){storageSet("askName_"+u.uid,"1");setTimeout(()=>openAccount(true),600)}
     m.hidden=false;m.className="msg";m.textContent="Загружаю заказы…";
     col=fdb.collection("orders");
-    unsub=col.onSnapshot(snap=>{orders=snap.docs.map(d=>({id:d.id,...d.data()}));loaded=true;m.hidden=true;render()},
+    unsub=col.onSnapshot(snap=>{allDocs=snap.docs.map(d=>({id:d.id,...d.data()}));orders=allDocs.filter(o=>!o.deletedAt);trash=allDocs.filter(o=>o.deletedAt).sort((a,b)=>b.deletedAt-a.deletedAt);loaded=true;m.hidden=true;purgeTrash();render()},
       e=>{m.hidden=false;m.className="msg err";m.textContent=e&&e.code==="permission-denied"?"У этого аккаунта нет доступа к заказам.":"Связь с базой прервалась. Обновите страницу."});
     render();
   });
