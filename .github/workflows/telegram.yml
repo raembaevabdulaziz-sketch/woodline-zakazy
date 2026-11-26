@@ -1,0 +1,43 @@
+name: Telegram-отчёты
+
+on:
+  schedule:
+    - cron: "0 4 * * *"    # каждый день в 09:00 по Ташкенту — утренняя сводка
+    - cron: "10 4 * * 1"   # по понедельникам в 09:10 — сводка и копия всех заказов
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Что сделать"
+        type: choice
+        options: [daily, weekly, setup]
+        default: daily
+
+permissions:
+  contents: read
+  actions: write   # чтобы GitHub не выключил расписание через 60 дней без коммитов
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Установить зависимости
+        working-directory: bot
+        run: npm install --no-audit --no-fund
+      - name: Отправить отчёт
+        working-directory: bot
+        env:
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '10 4 * * 1' && 'weekly' || 'daily') }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          APP_URL: https://raembaevabdulaziz-sketch.github.io/woodline-zakazy/
+        run: node report.mjs
+      - name: Не дать расписанию уснуть
+        if: github.event.schedule == '10 4 * * 1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow enable telegram.yml --repo "${{ github.repository }}"

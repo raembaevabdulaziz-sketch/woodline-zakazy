@@ -1,0 +1,9 @@
+{
+  "name": "woodline-telegram-reports",
+  "private": true,
+  "type": "module",
+  "description": "Утренняя сводка и еженедельная копия заказов Woodline в Telegram",
+  "dependencies": {
+    "firebase-admin": "12.7.0"
+  }
+}
