@@ -41,8 +41,19 @@ function listBlock(title, arr, extra, max = 12) {
   return `<b>${title}: ${arr.length}</b>\n${rows.join('\n')}`;
 }
 
+/** Notes whose reminder date is today or already passed and that are not done yet. */
+export function dueNotes(notes, today) {
+  return (notes || []).filter(n => !n.done && daysLeft(n.remindDate, today) != null && daysLeft(n.remindDate, today) <= 0)
+    .sort((a, b) => String(a.remindDate).localeCompare(String(b.remindDate)));
+}
+function noteLine(n, today) {
+  const t = String(n.title || '').trim() || String(n.text || '').trim().split('\n')[0].slice(0, 90) || 'Заметка';
+  const d = daysLeft(n.remindDate, today);
+  return `• ${esc(t)}${d < 0 ? ` <i>(с ${humanDate(n.remindDate)})</i>` : ''}`;
+}
+
 /** Morning summary as Telegram HTML. */
-export function buildDaily(orders, { today, appUrl }) {
+export function buildDaily(orders, { today, appUrl, notes = [] }) {
   const live = orders.filter(o => !o.deletedAt);
   const act = live.filter(o => !CLOSED.has(o.status));
   const dl = o => daysLeft(o.date, today);
@@ -55,6 +66,8 @@ export function buildDaily(orders, { today, appUrl }) {
   const collectToday = tod.reduce((s, o) => s + remaining(o), 0);
 
   const parts = [`<b>Woodline · сводка на ${humanDate(today)}</b>`];
+  const dn = dueNotes(notes, today);
+  if (dn.length) parts.push(`<b>Напоминания: ${dn.length}</b>\n` + dn.slice(0, 12).map(n => noteLine(n, today)).join('\n') + (dn.length > 12 ? `\n…и ещё ${dn.length - 12}` : ''));
   if (!tod.length && !late.length && !tom.length) parts.push('На сегодня и завтра доставок нет, просроченных заказов нет.');
   const t = listBlock('Сегодня доставить', tod);
   if (t) parts.push(t + (collectToday ? `\nПолучить с клиентов: <b>${money(collectToday)} сум</b>` : ''));

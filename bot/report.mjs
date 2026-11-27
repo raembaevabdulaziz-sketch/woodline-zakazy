@@ -1,6 +1,6 @@
 // Telegram reports for the Woodline orders app. Run by GitHub Actions (.github/workflows/telegram.yml).
 //   MODE=setup  — remember who wrote to the bot, so reports go to that chat
-//   MODE=daily  — morning summary + clean the trash (orders deleted more than 20 days ago)
+//   MODE=daily  — morning summary (orders + note reminders) + clean the trash (orders deleted more than 20 days ago)
 //   MODE=weekly — summary + CSV and full JSON backup of all orders
 // Secrets: FIREBASE_SERVICE_ACCOUNT (service-account JSON), TELEGRAM_BOT_TOKEN.
 import { initializeApp, cert } from 'firebase-admin/app';
@@ -46,6 +46,10 @@ async function loadOrders() {
   const snap = await db.collection('orders').get();
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 }
+async function loadNotes() {
+  try { const snap = await db.collection('notes').get(); return snap.docs.map(d => ({ id: d.id, ...d.data() })); }
+  catch (e) { console.error('Заметки не прочитались:', e.message); return []; }
+}
 async function chatIds() {
   const c = (await cfgRef.get()).data();
   if (!c || !Array.isArray(c.chatIds) || !c.chatIds.length) { console.error('Чат не настроен: запустите workflow с режимом setup.'); process.exit(1); }
@@ -55,8 +59,9 @@ async function chatIds() {
 async function daily(withBackup) {
   const ids = await chatIds();
   const orders = await loadOrders();
+  const notes = await loadNotes();
   const today = todayISO();
-  const text = buildDaily(orders, { today, appUrl: APP_URL });
+  const text = buildDaily(orders, { today, appUrl: APP_URL, notes });
   for (const id of ids) await tg('sendMessage', { chat_id: id, text, parse_mode: 'HTML', disable_web_page_preview: true });
 
   const old = expiredTrash(orders);
@@ -65,11 +70,11 @@ async function daily(withBackup) {
 
   if (withBackup) {
     const csv = buildCSV(orders);
-    const json = JSON.stringify({ exportedAt: new Date().toISOString(), orders }, null, 1);
+    const json = JSON.stringify({ exportedAt: new Date().toISOString(), orders, notes }, null, 1);
     for (const id of ids) {
       for (const [name, data, type, caption] of [
         [`zakazy-${today}.csv`, csv, 'text/csv', 'Копия заказов на ' + today + ' (открывается в Excel)'],
-        [`backup-${today}.json`, json, 'application/json', 'Полная резервная копия, включая корзину и историю'],
+        [`backup-${today}.json`, json, 'application/json', 'Полная резервная копия: заказы (с корзиной и историей) и заметки'],
       ]) {
         const f = new FormData();
         f.append('chat_id', String(id));
